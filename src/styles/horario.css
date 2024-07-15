@@ -1,0 +1,12 @@
+.horario{
+    padding-top: 20px;
+}
+
+.inicio{
+    padding-right: 1150px;
+    color: white
+}
+
+.inicio:active{
+    color: black
+}

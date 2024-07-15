@@ -1,11 +1,12 @@
 import React from "react";
+import {Link} from 'react-router-dom'
 
 const Navbar= ()=>{
 
     const whatsappUrl = `https://wa.me/${'56959454869'}?text=${encodeURIComponent('Hola, me gustaría más información.')}`;
     const facebookUrl= `https://www.facebook.com/profile.php?id=100093007008249&mibextid=LQQJ4d`
     const instagramUrl = `https://www.instagram.com/distribuidorakiwan?igsh=ZTg3bnZnajhyZ3B3&utm_source=qr`
-   const tiktokUrl = `https://www.tiktok.com/@distribuidorakiwan?_t=8nycqVW2kc9&_r=1`
+    const tiktokUrl = `https://www.tiktok.com/@distribuidorakiwan?_t=8nycqVW2kc9&_r=1`
     
     const handleClick=(url)=>{
         window.open(url, '_blank')
@@ -21,11 +22,15 @@ const Navbar= ()=>{
     </button>
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-        <li className="nav-item">
-          <a className="nav-link active" aria-current="page" href="#">Horario</a>
+        <li className="nav-item" >
+        <Link to="/horario" className="nav-link active" aria-current="page">
+           Horario
+        </Link>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="#">Contacto</a>
+          <Link to="/contacto" className="nav-link">
+          Contacto
+          </Link>
         </li>
         <li className="nav-item dropdown">
           <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

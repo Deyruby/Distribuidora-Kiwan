@@ -1,0 +1,74 @@
+.contacto{
+    padding-top: 20px;
+}
+
+.inicio{
+    padding-right: 1150px;
+    color: white
+}
+
+.inicio:active{
+    color: black
+}
+
+.emailcontacto{
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  .emailcontacto .tooltiptextemailcontacto {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%; /* Posición encima del ícono */
+    left: 85%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 20px;
+    font-weight: normal;
+  }
+
+  .emailcontacto:hover .tooltiptextemailcontacto {
+    visibility: visible;
+    opacity: 1;
+  }
+
+
+
+.iconcontacto{
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  .iconcontacto .tooltiptextcontacto {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    top: 125%; 
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 20px;
+    font-weight: normal;
+  }
+
+  .iconcontacto:hover .tooltiptextcontacto {
+    visibility: visible;
+    opacity: 1;
+  }

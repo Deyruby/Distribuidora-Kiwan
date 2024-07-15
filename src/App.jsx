@@ -1,17 +1,20 @@
-
-import './App.css'
-import logo from '../src/assets/logo.jpg'
-import Navbar from './components/Navbar'
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./views/home"
+import Horario from "./views/horario"
+import Contacto from "./views/contacto";
 
 function App() {
   
 
   return (
     <>
-   <div className='container-fluid'>
-    <img src={logo} className='logo'/>
-    <Navbar/>
-    </div>
+    <BrowserRouter>
+  <Routes>
+   <Route path="/" element={<Home/>}/>
+   <Route path="/horario" element={<Horario/>}/>
+   <Route path="/contacto" element={<Contacto/>}/>
+    </Routes>
+    </BrowserRouter>
     </>
   )
 }
