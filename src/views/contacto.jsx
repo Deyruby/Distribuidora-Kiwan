@@ -14,10 +14,12 @@ const Contacto=()=>{
 return(
 <>
 <div className='container-fluid'>
+    <div className='header'>
     <img src={logo} className='logo'/>
     <Navbar/>
     </div>
-    <div className='contacto'>
+    <div className='main-content'>
+        <div className='tittle'>
         <Link to="/">
         <h5 className='inicio'>Volver al Inicio</h5>
         </Link>
@@ -40,6 +42,9 @@ return(
         </a>
         </h2>
     </div>
+    </div>
+    </div>
+  
 
 </>
 

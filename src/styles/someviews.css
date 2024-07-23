@@ -1,10 +1,11 @@
-.horario{
+.tittle{
     padding-top: 20px;
 }
 
 .inicio{
     padding-right: 1150px;
-    color: white
+    color: white;
+   
 }
 
 .inicio:active{

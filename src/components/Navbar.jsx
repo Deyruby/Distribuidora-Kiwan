@@ -6,7 +6,7 @@ const Navbar= ()=>{
     const whatsappUrl = `https://wa.me/${'56959454869'}?text=${encodeURIComponent('Hola, me gustaría más información.')}`;
     const facebookUrl= `https://www.facebook.com/profile.php?id=100093007008249&mibextid=LQQJ4d`
     const instagramUrl = `https://www.instagram.com/distribuidorakiwan?igsh=ZTg3bnZnajhyZ3B3&utm_source=qr`
-    const tiktokUrl = `https://www.tiktok.com/@distribuidorakiwan?_t=8nycqVW2kc9&_r=1`
+   const tiktokUrl = `https://www.tiktok.com/@distribuidorakiwan?_t=8nycqVW2kc9&_r=1`
     
     const handleClick=(url)=>{
         window.open(url, '_blank')
@@ -15,8 +15,8 @@ const Navbar= ()=>{
     return(
     <>
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-  <div className="container-fluid">
-    <a className=" ms-3 navbar-brand" href="#">Ubicación</a>
+  <div className="container">
+    <Link to="/ubicacion" className=" ms-3 navbar-brand">Ubicación</Link>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
@@ -28,7 +28,7 @@ const Navbar= ()=>{
         </Link>
         </li>
         <li className="nav-item">
-          <Link to="/contacto" className="nav-link">
+          <Link to="/contacto" className="nav-link active">
           Contacto
           </Link>
         </li>
@@ -37,14 +37,14 @@ const Navbar= ()=>{
             Catálogo de Productos
           </a>
           <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a className="dropdown-item" href="#">Abarrotes</a></li>
-            <li><a className="dropdown-item" href="#">Helados</a></li>
-            <li><a className="dropdown-item" href="#">Congelados</a></li>
-            <li><a className="dropdown-item" href="#">Lácteos</a></li>
-            <li><a className="dropdown-item" href="#">Bebidas</a></li>
-            <li><a className="dropdown-item" href="#">Mascotas</a></li>
-            <li><a className="dropdown-item" href="#">Aseo</a></li>
-            <li><a className="dropdown-item" href="#">Higiene Personal</a></li>
+            <li><Link to="/abarrotes" className="dropdown-item">Abarrotes</Link></li>
+            <li><Link to="/helados" className="dropdown-item">Helados</Link></li>
+            <li><Link to="/congelados" className="dropdown-item">Congelados</Link></li>
+            <li><Link to="/lacteos" className="dropdown-item">Lácteos</Link></li>
+            <li><Link to="/bebidas" className="dropdown-item">Bebidas</Link></li>
+            <li><Link to="/mascotas" className="dropdown-item">Mascotas</Link></li>
+            <li><Link to="/aseo" className="dropdown-item">Aseo</Link></li>
+            <li><Link to="/higienepersonal" className="dropdown-item">Higiene Personal</Link></li>
           </ul>
         </li>
       </ul>

@@ -1,8 +1,10 @@
 import "../styles/home.css";
+import "../styles/someviews.css"
 import logo from "../../src/assets/logo.jpg";
 import Navbar from "../components/Navbar";
+import {Link} from "react-router-dom";
 
-const Home = () => {
+const Bebidas = () => {
   return (
     <>
       <div className="container-fluid">
@@ -10,12 +12,17 @@ const Home = () => {
           <img src={logo} className="logo" />
           <Navbar />
         </div>
-        <div className="main-content">HOLAaaaaa
-            ESTAMOS PROBANDO SI HAY SCROLL 
+        <div className="main-content">
+            <div className="tittle">
+        <Link to="/">
+        <h5 className='inicio'>Volver al Inicio</h5>
+        </Link>
+            <h1>Bebidas</h1> 
+        </div>
         </div>
       </div>
     </>
   );
 };
 
-export default Home;
+export default Bebidas
