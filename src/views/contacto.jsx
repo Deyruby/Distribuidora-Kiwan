@@ -1,7 +1,4 @@
-import '../styles/home.css'
 import '../styles/contacto.css'
-import logo from '../../src/assets/logo.jpg'
-import Navbar from '../components/Navbar'
 import { Link } from 'react-router-dom'
 
 
@@ -14,10 +11,6 @@ const Contacto=()=>{
 return(
 <>
 <div className='container-fluid'>
-    <div className='header'>
-    <img src={logo} className='logo'/>
-    <Navbar/>
-    </div>
     <div className='main-content'>
         <div className='tittle'>
         <Link to="/">

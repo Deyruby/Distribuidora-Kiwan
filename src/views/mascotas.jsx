@@ -1,17 +1,10 @@
-import "../styles/home.css";
-import "../styles/someviews.css"
-import logo from "../../src/assets/logo.jpg";
-import Navbar from "../components/Navbar";
+import "../styles/someviews.css";
 import { Link } from "react-router-dom";
 
 const Mascotas = () => {
   return (
     <>
       <div className="container-fluid">
-        <div className="header">
-          <img src={logo} className="logo" />
-          <Navbar />
-        </div>
         <div className="main-content">
             <div className="tittle">
         <Link to="/">
