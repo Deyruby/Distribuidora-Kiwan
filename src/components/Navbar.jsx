@@ -67,8 +67,8 @@ const Navbar = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/helados" className="dropdown-item">
-                      Helados
+                    <Link to="/lacteos" className="dropdown-item">
+                      Lácteos
                     </Link>
                   </li>
                   <li>
@@ -77,18 +77,13 @@ const Navbar = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/lacteos" className="dropdown-item">
-                      Lácteos
-                    </Link>
-                  </li>
-                  <li>
                     <Link to="/bebidas" className="dropdown-item">
                       Bebidas
                     </Link>
                   </li>
                   <li>
-                    <Link to="/mascotas" className="dropdown-item">
-                      Mascotas
+                    <Link to="/helados" className="dropdown-item">
+                      Helados
                     </Link>
                   </li>
                   <li>
@@ -99,6 +94,11 @@ const Navbar = () => {
                   <li>
                     <Link to="/higienepersonal" className="dropdown-item">
                       Higiene Personal
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/mascotas" className="dropdown-item">
+                      Mascotas
                     </Link>
                   </li>
                 </ul>

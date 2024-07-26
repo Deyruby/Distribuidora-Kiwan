@@ -57,7 +57,13 @@ export const abarrotes = [
     url: "http://localhost:5173/src/assets/abarrotes/pomarola 200gr.jpg", 
     price: "690",
     name: "Salsa Pomarola 200gr", 
-    offer:"PREGUNTAR"
+    offer:"$620 Por Caja de 24"
+  },
+  {
+    url: "http://localhost:5173/src/assets/abarrotes/salsa san remo.jpg", 
+    price: "500",
+    name: "Salsa San Remo 200gr",
+    offer:"$450 Por Caja de 24"
   },
 
   {
