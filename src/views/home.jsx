@@ -1,5 +1,8 @@
+import React, { useRef, useEffect } from "react";
 import "../styles/home.css";
+import "../styles/contacto.css";
 import { Link } from "react-router-dom";
+import MyMap from "../components/Ubicacion";
 
 const productsFirstPage = [
   {
@@ -19,6 +22,7 @@ const products = [
     url: "http://localhost:5173/src/assets/aseo/papel-noble-22m.webp",
     price: "$12.000",
     description: "Papel Higiénico Noble 60 Rollos",
+    title: "Todo lo que necesitas para el Aseo!",
     type: "Aseo",
   },
   {
@@ -31,6 +35,7 @@ const products = [
     url: "http://localhost:5173/src/assets/bebidas/jugos watts cajita naranja.png",
     price: "$6.700",
     description: "Jugos Watts, Caja 30 unidades",
+    title: "Jugos de Colación!",
     type: "Bebidas",
   },
 ];
@@ -43,7 +48,35 @@ const groupedProducts = products.reduce((acc, product) => {
   return acc;
 }, {});
 
-const Home = () => {
+console.log("GROUPEDPRODUCTS", groupedProducts);
+
+const Home = ({ scrollTo }) => {
+  const ubicacion= useRef(null);
+  const horario = useRef(null);
+  const contacto = useRef(null);
+
+  const scrollToSection = (section) => {
+    switch (section) {
+      case "ubicacion":
+        ubicacion.current.scrollIntoView({ behavior: "smooth" });
+        break;
+      case "horario":
+        horario.current.scrollIntoView({ behavior: "smooth" });
+        break;
+      case "contacto":
+        contacto.current.scrollIntoView({ behavior: "smooth" });
+        break;
+      default:
+        break;
+    }
+  };
+
+  useEffect(() => {
+    if (scrollTo) {
+      scrollTo.current = scrollToSection;
+    }
+  }, [scrollTo]);
+
   return (
     <>
       <div className="container-fluid">
@@ -125,7 +158,7 @@ const Home = () => {
                         Ver Abarrotes
                       </button>
                     </Link>
-                    {productsFirstPage.map((element) => {
+                    {productsFirstPage.map((element, index) => {
                       return (
                         <div
                           className="card d-flex align-items-center rounded m-3"
@@ -133,6 +166,7 @@ const Home = () => {
                             width: "300px",
                             height: "300px",
                           }}
+                          key={index}
                         >
                           <img
                             src={element.url}
@@ -163,18 +197,14 @@ const Home = () => {
               </div>
               {Object.keys(groupedProducts).map((type) => (
                 <div className="carousel-item" key={type}>
-                  <div
-                    className="d-flex justify-content-center"
-                    style={{ height: "350px" }}
-                  >
+                  <div className="d-flex" style={{ height: "350px" }}>
                     <h1
                       style={{
                         fontStyle: "italic",
-                        marginBottom:"300px",
-                        
+                        marginBottom: "300px",
                       }}
                     >
-                      {type}
+                      {groupedProducts[type][0].title}
                     </h1>
                     {groupedProducts[type].map((element, index) => (
                       <div
@@ -235,6 +265,59 @@ const Home = () => {
             </button>
           </div>
         </div>
+        <section ref={ubicacion}>
+          <h2 className=" pt-5 fst-italic">Ubicación</h2>
+          <div className="ubicacion border-top pt-5 d-flex justify-content-center">
+            <MyMap />
+          </div>
+        </section>
+        <section ref={horario}>
+          <h2 className="pt-5 fst-italic">Horario</h2>
+          <div className="horario d-flex justify-content-center">
+            <div className="border-top pt-3" style={{ width: "1250px" }}>
+              <h3>Lunes a Sábado:</h3>
+              <h3>9:30 am a 20:00 Horas</h3>
+              <h3>Domingo:</h3>
+              <h3>
+                <h3>10:00 am a 17:00 Horas</h3>
+              </h3>
+            </div>
+          </div>
+        </section>
+        <section ref={contacto}>
+          <h2 className="fst-italic pt-4">Contacto</h2>
+          <div className="contacto d-flex justify-content-center">
+            <div className="border-top" style={{ width: "1250px" }}>
+              <h3>
+                Email:
+                <a
+                  href="mailto: distribuidorakiwan@gmail.com"
+                  className="emailcontacto"
+                >
+                  <i
+                    className="fa-solid fa-envelope ps-2 pe-2"
+                    style={{ color: "#0a0a0a", paddingTop: "30px" }}
+                  ></i>
+                  distribuidorakiwan@gmail.com
+                  <span className="tooltiptextemailcontacto">
+                    Enviar Correo!
+                  </span>
+                </a>
+              </h3>
+              <h3>
+                Teléfono:
+                <a href="tel:+56959454869" className="iconcontacto">
+                  <i
+                    className="fa-solid fa-phone ps-2 "
+                    style={{ color: "#00040a" }}
+                  ></i>
+                  +56959454869
+                  <span className="tooltiptextcontacto">Llamar!</span>
+                </a>
+              </h3>
+            </div>
+          </div>
+        </section>
       </div>
     </>
   );

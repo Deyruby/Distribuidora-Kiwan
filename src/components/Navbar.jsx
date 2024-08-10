@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../src/assets/logo.jpg";
 
-const Navbar = () => {
+const Navbar = ({ scrollTo }) => {
   const whatsappUrl = `https://wa.me/${"56959454869"}?text=${encodeURIComponent(
     "Hola, me gustaría más información."
   )}`;
@@ -14,14 +14,23 @@ const Navbar = () => {
     window.open(url, "_blank");
   };
 
+  const handleScroll = (section) => {
+    if (scrollTo.current) {
+      scrollTo.current(section);
+    }
+  };
+
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <img src={logo} className="logo img-fluid" />
         <div className="container-fluid">
-          <Link to="/ubicacion" className=" ms-3 navbar-brand">
+          <a
+            className=" ms-3 navbar-brand"
+            onClick={() => handleScroll("ubicacion")}
+          >
             Ubicación
-          </Link>
+          </a>
           <button
             className="navbar-toggler"
             type="button"
@@ -36,18 +45,22 @@ const Navbar = () => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link
-                  to="/horario"
+                <a
+                  href="#"
                   className="nav-link active"
                   aria-current="page"
+                  onClick={() => handleScroll("horario")}
                 >
                   Horario
-                </Link>
+                </a>
               </li>
               <li className="nav-item">
-                <Link to="/contacto" className="nav-link active">
+                <a
+                  className="nav-link active"
+                  onClick={() => handleScroll("contacto")}
+                >
                   Contacto
-                </Link>
+                </a>
               </li>
               <li className="nav-item dropdown">
                 <a
