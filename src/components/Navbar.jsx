@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../src/assets/logo.jpg";
+//import "../styles/home.css";
 
 const Navbar = ({ scrollTo }) => {
   const whatsappUrl = `https://wa.me/${"56959454869"}?text=${encodeURIComponent(
@@ -80,37 +81,37 @@ const Navbar = ({ scrollTo }) => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/lacteos" className="dropdown-item">
+                    <Link to="/catalogodeproductos/lácteos" className="dropdown-item">
                       Lácteos
                     </Link>
                   </li>
                   <li>
-                    <Link to="/congelados" className="dropdown-item">
+                    <Link to="/catalogodeproductos/congelados" className="dropdown-item">
                       Congelados
                     </Link>
                   </li>
                   <li>
-                    <Link to="/bebidas" className="dropdown-item">
+                    <Link to="/catalogodeproductos/bebidas" className="dropdown-item">
                       Bebidas
                     </Link>
                   </li>
                   <li>
-                    <Link to="/helados" className="dropdown-item">
+                    <Link to="/catalogodeproductos/helados" className="dropdown-item">
                       Helados
                     </Link>
                   </li>
                   <li>
-                    <Link to="/aseo" className="dropdown-item">
+                    <Link to="/catalogodeproductos/aseo" className="dropdown-item">
                       Aseo
                     </Link>
                   </li>
                   <li>
-                    <Link to="/higienepersonal" className="dropdown-item">
+                    <Link to="/catalogodeproductos/higienePersonal" className="dropdown-item">
                       Higiene Personal
                     </Link>
                   </li>
                   <li>
-                    <Link to="/mascotas" className="dropdown-item">
+                    <Link to="/catalogodeproductos/mascotas" className="dropdown-item">
                       Mascotas
                     </Link>
                   </li>

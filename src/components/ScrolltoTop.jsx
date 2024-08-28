@@ -1,63 +1,53 @@
 import React, { useState, useEffect } from "react";
-//import "../styles/scrolltoTop.css";
 
-const ScrolltoTop = () => {
+const ScrollToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
 
-  const toggleVisibility = () => {
-    console.log("Current scroll position:", window.scrollY); // Verifica la posición del scroll
-    if (window.scrollY > 5000) {
+  // Function to handle scroll event
+  /* const handleScroll = () => {
+    if (window.scrollY > 300) { // Show button after scrolling down 300px
       setIsVisible(true);
     } else {
       setIsVisible(false);
     }
+  }; */
+
+  const handleScroll = () => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+    // Mostrar o ocultar el botón según la posición del desplazamiento
+    setIsVisible(scrollTop > 100);
+  };
+
+  // Function to scroll to top
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   useEffect(() => {
-    const handleScroll = () => {
-      console.log("Scroll event triggered"); // Verifica si el evento de scroll se dispara
-      toggleVisibility();
-    };
-
-    console.log("Adding scroll event listener"); // Verifica si se agrega el listener
+    // Add event listener on mount
     window.addEventListener("scroll", handleScroll);
 
-    // Limpieza del evento de scroll
+    // Remove event listener on unmount
     return () => {
-      console.log("Removing scroll event listener"); // Verifica si se elimina el listener
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
   return (
-    <button  style={{ position: 'fixed',
-    bottom: '80px',
-    right: '80px',
-    backgroundColor: '#ff0800',
-    color: '#ffffff',
-    border: 'none',
-    borderRadius: '50%',
-    width: '50px',
-    height: '50px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-    cursor: 'pointer',
-    fontSize: '24px',
-    transition: 'opacity 0.3s ease',
-    opacity: isVisible ? '1' : '0' }}
-      className={`scroll-to-top ${isVisible ? "visible" : ""}`}
-      onClick={scrollToTop}
-    >
-      <i className="fa-solid fa-arrow-up"></i>
-      {console.log("Button isVisible:", isVisible)}
-    </button>
+    <div>
+      {isVisible && (
+        <button className="button" onClick={scrollToTop}>
+          <i className="fa-solid fa-arrow-up"></i>
+        </button>
+      )}
+    </div>
   );
 };
 
-export default ScrolltoTop;
+
+
+export default ScrollToTopButton;
