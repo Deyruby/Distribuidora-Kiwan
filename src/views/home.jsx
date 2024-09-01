@@ -4,7 +4,7 @@ import "../styles/home.css";
 import Carousel from "../components/Carousel";
 import MyMap from "../components/Ubicacion";
 
-const Home = ({ scrollTo }) => {
+const Home = ({ scrollTo}) => {
   const ubicacion = useRef(null);
   const horario = useRef(null);
   const contacto = useRef(null);
@@ -33,7 +33,7 @@ const Home = ({ scrollTo }) => {
 
   return (
     <>
-      <div className="container-fluid">
+      <div className="container-fluid pt-5">
         <Carousel />
         <section ref={ubicacion}>
           <h2 className=" pt-5 fst-italic">Ubicación</h2>

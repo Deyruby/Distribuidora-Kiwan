@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef,useState, useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Home from "./views/home";
 import SignIn from "./views/signin";
@@ -6,9 +6,11 @@ import Abarrotes from "./views/abarrotes";
 import CatalogoDeProductos from "./views/catalogodeproductos";
 import Navbar from "./components/Navbar";
 import ScrollToTopButton from "./components/ScrolltoTop";
+import NuevoProducto from "./views/nuevoproducto";
 
 function App() {
   const location = useLocation();
+  const [isAdmin, setIsAdmin]= useState(true)
 
   const scrollTo = useRef(null);
   //const scrollContainerRef=useRef(null) /*rutas dinamica
@@ -30,9 +32,10 @@ function App() {
         <Navbar scrollTo={scrollTo} />
       )}
       <Routes>
-        <Route path="/" element={<Home scrollTo={scrollTo} />} />
+        <Route path="/" element={<Home scrollTo={scrollTo}/>} />
         <Route path="/signin" element={<SignIn />} />
-        <Route path="/catalogodeproductos/:category" element={<CatalogoDeProductos/>}/>
+        <Route path="/agregarnuevoproducto" element={<NuevoProducto/>} />
+        <Route path="/catalogodeproductos/:category" element={<CatalogoDeProductos isAdmin={isAdmin}/>}  />
         <Route path="/abarrotes" element={<Abarrotes />} />
       </Routes>
       <ScrollToTopButton />
