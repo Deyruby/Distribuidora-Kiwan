@@ -1,10 +1,11 @@
 import React, { useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "../styles/home.css";
 //import "../styles/contacto.css";
 import Carousel from "../components/Carousel";
 import MyMap from "../components/Ubicacion";
 
-const Home = ({ scrollTo}) => {
+const Home = ({ scrollTo, isAdmin}) => {
   const ubicacion = useRef(null);
   const horario = useRef(null);
   const contacto = useRef(null);
@@ -34,6 +35,13 @@ const Home = ({ scrollTo}) => {
   return (
     <>
       <div className="container-fluid pt-5">
+      {isAdmin && (
+                <div className="agregarproducto">
+                  <Link to="/agregarnuevoproducto">
+                    <h5>Agregar Producto al Catálogo</h5>
+                  </Link>
+                </div>
+              )}
         <Carousel />
         <section ref={ubicacion}>
           <h2 className=" pt-5 fst-italic">Ubicación</h2>

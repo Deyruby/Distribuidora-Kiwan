@@ -1,16 +1,79 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../styles/home.css";
 
-const NuevoProducto = () => {
-  const [name, setName] = useState("");
+const ProductForm = ({ productId }) => {
+  /*const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [offer, setOffer] = useState("");
   const [category, setCategory] = useState("");
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState(null);*/
+
+  const [product, setProduct] = useState({
+    name: "",
+    price: "",
+    offer: "",
+    category: "",
+    image: null,
+  });
+  console.log("vamos a ver que tiene product", product)
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
-  const handleSubmit = async (e) => {
+  useEffect(() => {
+    if (productId) {
+      // Cargar datos del producto para edición
+      fetch(`http://127.0.0.1:3000/getproduct/${productId}`)
+        .then((response) => response.json())
+        .then((data) => setProduct(data))
+        .catch((error) => console.error("Error:", error));
+    }
+  }, [productId]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setProduct((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setProduct((prev) => ({ ...prev, image: file }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const { name, price, offer, category, image } = product;
+    const method = productId ? "PUT" : "POST";
+    const url = productId
+      ? `http://127.0.0.1:3000/updateproduct/${productId}`
+      : "http://127.0.0.1:3000/uploadproduct";
+
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("price", price);
+    formData.append("offer", offer);
+    formData.append("category", category);
+    
+    if(image){
+      formData.append("image", image);
+    }
+
+    fetch(url, {
+      method: method,
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+        setShowSuccessPopup(true);
+
+        setTimeout(() => {
+          setShowSuccessPopup(false);
+        }, 3000);
+      })
+      .catch((error) => console.error("Error:", error));
+  };
+
+  /*const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -48,7 +111,7 @@ const NuevoProducto = () => {
     } catch (error) {
       console.error("Hubo un problema con la solicitud:", error);
     }
-  };
+  };*/
 
   return (
     <>
@@ -73,8 +136,9 @@ const NuevoProducto = () => {
                     id="productName"
                     placeholder="Nombre del Producto"
                     required
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    name="name"
+                    value={product.name}
+                    onChange={handleChange}
                   />
                 </div>
                 <div className="mb-3">
@@ -87,9 +151,10 @@ const NuevoProducto = () => {
                     id="productPrice"
                     placeholder="Precio del Producto"
                     required
+                    name="price"
                     step="0.01"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
+                    value={product.price}
+                    onChange={handleChange}
                   />
                 </div>
                 <div className="mb-3">
@@ -100,9 +165,10 @@ const NuevoProducto = () => {
                     type="text"
                     className="form-control"
                     id="productOffer"
+                    name="offer"
                     placeholder="Oferta del Producto"
-                    value={offer}
-                    onChange={(e) => setOffer(e.target.value)}
+                    value={product.offer}
+                    onChange={handleChange}
                   />
                 </div>
                 <div className="mb-3">
@@ -113,8 +179,9 @@ const NuevoProducto = () => {
                     id="productCategory"
                     className="form-select"
                     required
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
+                    name="category"
+                    value={product.category}
+                    onChange={handleChange}
                   >
                     <option value="">Seleccione una categoría</option>
                     <option value="abarrotes">Abarrotes</option>
@@ -122,9 +189,7 @@ const NuevoProducto = () => {
                     <option value="congelados">Congelados</option>
                     <option value="bebidas">Bebidas</option>
                     <option value="helados">Helados</option>
-                    <option value="galletasyconfites">
-                      Galletas y Confites
-                    </option>
+                    <option value="galletasyconfites"> Galletas y Confites</option>
                     <option value="aseo">Aseo</option>
                     <option value="higienepersonal">Higiene Personal</option>
                     <option value="mascotas">Mascotas</option>
@@ -139,19 +204,20 @@ const NuevoProducto = () => {
                     className="form-control"
                     id="productImage"
                     accept="image/*"
-                    required
-                    onChange={(e) => setImage(e.target.files[0])}
+                    onChange={handleImageChange}
                   />
                 </div>
                 <div className="text-center">
                   <button type="submit" className="btn btn-primary">
-                    Agregar Producto
+                    {productId ? "Actualizar Producto" : "Agregar Producto"}
                   </button>
                 </div>
               </form>
               {showSuccessPopup && (
                 <div className="popup-success">
-                  <p>Producto agregado exitosamente</p>
+                  <p>
+                    {productId ? "Producto Actualizado" : "Producto agregado"}
+                  </p>
                 </div>
               )}
             </div>
@@ -162,4 +228,4 @@ const NuevoProducto = () => {
   );
 };
 
-export default NuevoProducto;
+export default ProductForm;

@@ -6,7 +6,7 @@ import Abarrotes from "./views/abarrotes";
 import CatalogoDeProductos from "./views/catalogodeproductos";
 import Navbar from "./components/Navbar";
 import ScrollToTopButton from "./components/ScrolltoTop";
-import NuevoProducto from "./views/nuevoproducto";
+import ProductPage from "./views/productpage";
 
 function App() {
   const location = useLocation();
@@ -32,10 +32,11 @@ function App() {
         <Navbar scrollTo={scrollTo} />
       )}
       <Routes>
-        <Route path="/" element={<Home scrollTo={scrollTo}/>} />
+        <Route path="/" element={<Home scrollTo={scrollTo} isAdmin={isAdmin}/>}/>
         <Route path="/signin" element={<SignIn />} />
-        <Route path="/agregarnuevoproducto" element={<NuevoProducto/>} />
-        <Route path="/catalogodeproductos/:category" element={<CatalogoDeProductos isAdmin={isAdmin}/>}  />
+        <Route path="/agregarnuevoproducto" element={<ProductPage/>} />
+        <Route path="/editarproducto/:id" element={<ProductPage/>} />
+        <Route path="/catalogodeproductos/:category" element={<CatalogoDeProductos isAdmin={isAdmin}/>}/>
         <Route path="/abarrotes" element={<Abarrotes />} />
       </Routes>
       <ScrollToTopButton />
