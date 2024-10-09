@@ -2,7 +2,6 @@ import React, { useRef,useState, useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Home from "./views/home";
 import SignIn from "./views/signin";
-import Abarrotes from "./views/abarrotes";
 import CatalogoDeProductos from "./views/catalogodeproductos";
 import Navbar from "./components/Navbar";
 import ScrollToTopButton from "./components/ScrolltoTop";
@@ -37,7 +36,6 @@ function App() {
         <Route path="/agregarnuevoproducto" element={<ProductPage/>} />
         <Route path="/editarproducto/:id" element={<ProductPage/>} />
         <Route path="/catalogodeproductos/:category" element={<CatalogoDeProductos isAdmin={isAdmin}/>}/>
-        <Route path="/abarrotes" element={<Abarrotes />} />
       </Routes>
       <ScrollToTopButton />
     </>

@@ -42,7 +42,7 @@ const Home = ({ scrollTo, isAdmin}) => {
                   </Link>
                 </div>
               )}
-        <Carousel />
+        <Carousel  isAdmin={isAdmin}/>
         <section ref={ubicacion}>
           <h2 className=" pt-5 fst-italic">Ubicación</h2>
           <div className="ubicacion border-top pt-5 d-flex justify-content-center">

@@ -3,12 +3,6 @@ import { Link } from "react-router-dom";
 import "../styles/home.css";
 
 const ProductForm = ({ productId }) => {
-  /*const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
-  const [offer, setOffer] = useState("");
-  const [category, setCategory] = useState("");
-  const [image, setImage] = useState(null);*/
-
   const [product, setProduct] = useState({
     name: "",
     price: "",
@@ -16,7 +10,7 @@ const ProductForm = ({ productId }) => {
     category: "",
     image: null,
   });
-  console.log("vamos a ver que tiene product", product)
+  console.log("vamos a ver que tiene product", product);
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
   useEffect(() => {
@@ -31,7 +25,8 @@ const ProductForm = ({ productId }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setProduct((prev) => ({ ...prev, [name]: value }));
+    
+    setProduct((prev) => ({ ...prev, [name]: name === "offer_carrusel" ? value === "true" : value}));
   };
 
   const handleImageChange = (e) => {
@@ -41,7 +36,7 @@ const ProductForm = ({ productId }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { name, price, offer, category, image } = product;
+    const { name, price, offer, offer_carrusel, category, image } = product;
     const method = productId ? "PUT" : "POST";
     const url = productId
       ? `http://127.0.0.1:3000/updateproduct/${productId}`
@@ -52,67 +47,32 @@ const ProductForm = ({ productId }) => {
     formData.append("price", price);
     formData.append("offer", offer);
     formData.append("category", category);
-    
-    if(image){
+
+    if (image) {
       formData.append("image", image);
     }
+    formData.append("offer_carrusel", offer_carrusel || 0);
 
     fetch(url, {
       method: method,
       body: formData,
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error en la solicitud");
+        }
+        return response.json();
+      })
       .then((data) => {
         console.log("Success:", data);
         setShowSuccessPopup(true);
-
         setTimeout(() => {
           setShowSuccessPopup(false);
         }, 3000);
       })
       .catch((error) => console.error("Error:", error));
   };
-
-  /*const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const formData = new FormData();
-
-    formData.append("name", name);
-    formData.append("price", price);
-    formData.append("offer", offer);
-    formData.append("category", category);
-    formData.append("image", image);
-
-    try {
-      const response = await fetch("http://127.0.0.1:3000/uploadproduct", {
-        method: "POST",
-        body: formData,
-      });
-
-      if (!response.ok) {
-        throw new Error("Error al agregar el producto.");
-      }
-
-      const result = await response.json();
-      console.log("Producto agregado:", result);
-
-      setName("");
-      setPrice("");
-      setOffer("");
-      setCategory("");
-      setImage(null);
-
-      setShowSuccessPopup(true);
-
-      setTimeout(() => {
-        setShowSuccessPopup(false);
-      }, 3000);
-    } catch (error) {
-      console.error("Hubo un problema con la solicitud:", error);
-    }
-  };*/
-
+  console.log("productCarrusel",product.offer_carrusel)
   return (
     <>
       <div className="container-form">
@@ -124,7 +84,6 @@ const ProductForm = ({ productId }) => {
               </Link>
             </div>
             <div className="card-form p-4 shadow-sm">
-              <h2 className="text-center mb-4">Agregar Nuevo Producto</h2>
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                   <label htmlFor="productName" className="form-label">
@@ -172,6 +131,21 @@ const ProductForm = ({ productId }) => {
                   />
                 </div>
                 <div className="mb-3">
+                  <label htmlFor="productOfferCarrusel" className="form-label">
+                    Colocar oferta en página de inicio
+                  </label>
+                  <select
+                    id="productOfferCarrusel"
+                    className="form-select"
+                    name="offer_carrusel"
+                    value={product.offer_carrusel ? 'true': 'false'}
+                    onChange={handleChange}
+                  >
+                    <option value={"false"}>No</option>
+                    <option value={"true"}>Sí</option>
+                  </select>
+                </div>
+                <div className="mb-3">
                   <label htmlFor="productCategory" className="form-label">
                     Categoría del Producto
                   </label>
@@ -189,7 +163,10 @@ const ProductForm = ({ productId }) => {
                     <option value="congelados">Congelados</option>
                     <option value="bebidas">Bebidas</option>
                     <option value="helados">Helados</option>
-                    <option value="galletasyconfites"> Galletas y Confites</option>
+                    <option value="galletasyconfites">
+                      {" "}
+                      Galletas y Confites
+                    </option>
                     <option value="aseo">Aseo</option>
                     <option value="higienepersonal">Higiene Personal</option>
                     <option value="mascotas">Mascotas</option>

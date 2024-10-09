@@ -76,7 +76,7 @@ const Navbar = ({ scrollTo }) => {
                 </a>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li>
-                    <Link to="/abarrotes" className="dropdown-item">
+                    <Link to="catalogodeproductos/abarrotes" className="dropdown-item">
                       Abarrotes
                     </Link>
                   </li>
@@ -103,6 +103,11 @@ const Navbar = ({ scrollTo }) => {
                   <li>
                     <Link to="/catalogodeproductos/aseo" className="dropdown-item">
                       Aseo
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/catalogodeproductos/galletas&&confites" className="dropdown-item">
+                      Galletas y Confites
                     </Link>
                   </li>
                   <li>

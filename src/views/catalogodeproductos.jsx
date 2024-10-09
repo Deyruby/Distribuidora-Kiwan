@@ -9,19 +9,22 @@ const CatalogoDeProductos = ({ isAdmin }) => {
     products: [],
     total_pages: 0,
   });
-
+console.log("PRODUCTOS", products.products)
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
-  console.log("PRODUCTOS id", products);
+  
 
   const { category } = useParams();
+  console.log("CATEGORY", category)
 
   function normalizeCategory(category) {
     return category
       .normalize("NFD") // Descompone los caracteres acentuados
       .replace(/[\u0300-\u036f]/g, "") // Elimina los acentos
       .toLowerCase(); // Convierte a minúsculas
+      
   }
   const normalizedCategory = normalizeCategory(category);
+ 
 
   const getProducts = async () => {
     try {
@@ -74,11 +77,6 @@ const CatalogoDeProductos = ({ isAdmin }) => {
       console.error("Hubo un problema con la solicitud:", error);
     }
   };
-
-
-  const editProduct=()=>{
-
-  }
 
   return (
     <>

@@ -7,7 +7,7 @@ const ProductPage = () => {
 
     return (
         <div>
-            <h1>{id ? 'Editar Producto' : 'Agregar Producto'}</h1>
+            <h1 className='pt-3'>{id ? 'Editar Producto' : 'Agregar Producto'}</h1>
             <ProductForm productId={id} />
         </div>
     );
