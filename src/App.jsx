@@ -6,6 +6,7 @@ import CatalogoDeProductos from "./views/catalogodeproductos";
 import Navbar from "./components/Navbar";
 import ScrollToTopButton from "./components/ScrolltoTop";
 import ProductPage from "./views/productpage";
+import ProductSearchResults from "./views/search";
 
 function App() {
   const location = useLocation();
@@ -36,6 +37,7 @@ function App() {
         <Route path="/agregarnuevoproducto" element={<ProductPage/>} />
         <Route path="/editarproducto/:id" element={<ProductPage/>} />
         <Route path="/catalogodeproductos/:category" element={<CatalogoDeProductos isAdmin={isAdmin}/>}/>
+        <Route path="/search/:searchTerm" element={<ProductSearchResults isAdmin={isAdmin}/> }/>
       </Routes>
       <ScrollToTopButton />
     </>

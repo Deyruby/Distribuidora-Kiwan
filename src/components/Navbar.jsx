@@ -1,9 +1,21 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, {useState}   from "react";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../src/assets/logo.jpg";
 //import "../styles/home.css";
 
+
 const Navbar = ({ scrollTo }) => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchTerm.trim()) {
+      // Redirige a la vista de resultados con el término de búsqueda
+      navigate(`/search/${searchTerm}`);
+    }
+  };
+
   const whatsappUrl = `https://wa.me/${"56959454869"}?text=${encodeURIComponent(
     "Hola, me gustaría más información."
   )}`;
@@ -106,7 +118,7 @@ const Navbar = ({ scrollTo }) => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/catalogodeproductos/galletas&&confites" className="dropdown-item">
+                    <Link to="/catalogodeproductos/galletasyconfites" className="dropdown-item">
                       Galletas y Confites
                     </Link>
                   </li>
@@ -123,13 +135,15 @@ const Navbar = ({ scrollTo }) => {
                 </ul>
               </li>
             </ul>
-            <form className="d-flex ms-3">
+            <form className="d-flex ms-3" onSubmit={handleSearch}>
               <input
                 className="form-control me-2"
                 type="search"
                 style={{ width: "250px" }}
                 placeholder="Buscar"
                 aria-label="Search"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
               />
               <button className="btn btn-outline-success" type="submit">
                 Buscar

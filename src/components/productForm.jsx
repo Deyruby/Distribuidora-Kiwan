@@ -10,7 +10,7 @@ const ProductForm = ({ productId }) => {
     category: "",
     image: null,
   });
-  console.log("vamos a ver que tiene product", product);
+  console.log("vamos a ver como llega la categoria", product.category);
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
   useEffect(() => {
@@ -25,8 +25,11 @@ const ProductForm = ({ productId }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    
-    setProduct((prev) => ({ ...prev, [name]: name === "offer_carrusel" ? value === "true" : value}));
+
+    setProduct((prev) => ({
+      ...prev,
+      [name]: name === "offer_carrusel" ? value === "true" : value,
+    }));
   };
 
   const handleImageChange = (e) => {
@@ -51,15 +54,30 @@ const ProductForm = ({ productId }) => {
     if (image) {
       formData.append("image", image);
     }
-    formData.append("offer_carrusel", offer_carrusel || 0);
+    formData.append("offer_carrusel", offer_carrusel ? 1 : 0);
+
+    const token = localStorage.getItem("token");
 
     fetch(url, {
       method: method,
       body: formData,
+      headers: {
+        Authorization: `Bearer ${token}`, // Enviar el token aquí
+      },
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Error en la solicitud");
+          return response.json().then((errorData) => {
+            // Si el mensaje es el de los 6 productos en el carrusel
+            if (errorData.msg === "Ya hay 6 productos en el carrusel.") {
+              alert(
+                "No puedes agregar más productos al carrusel. Ya hay 6 productos."
+              );
+            } else {
+              alert("Error: " + errorData.msg);
+            }
+            throw new Error("Error en la solicitud");
+          });
         }
         return response.json();
       })
@@ -69,10 +87,17 @@ const ProductForm = ({ productId }) => {
         setTimeout(() => {
           setShowSuccessPopup(false);
         }, 3000);
+        setProduct({
+          name: "",
+          price: "",
+          offer: "",
+          category: "",
+          image: null,
+        });
       })
       .catch((error) => console.error("Error:", error));
   };
-  console.log("productCarrusel",product.offer_carrusel)
+  console.log("productCarrusel", product.offer_carrusel);
   return (
     <>
       <div className="container-form">
@@ -138,7 +163,7 @@ const ProductForm = ({ productId }) => {
                     id="productOfferCarrusel"
                     className="form-select"
                     name="offer_carrusel"
-                    value={product.offer_carrusel ? 'true': 'false'}
+                    value={product.offer_carrusel ? "true" : "false"}
                     onChange={handleChange}
                   >
                     <option value={"false"}>No</option>

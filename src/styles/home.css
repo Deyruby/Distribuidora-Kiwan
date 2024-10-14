@@ -230,6 +230,10 @@ h1{
 
 }
 
+.card-custom {
+  width: 15rem; /* Ajusta el ancho como desees */
+}
+
 .card-img-top{
   object-fit: contain;
   height: 180px;
